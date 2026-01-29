@@ -1,0 +1,88 @@
+{
+  "accounts": {
+    "40802000000000000013": {
+      "intervals": [
+        {
+          "date_end": "2024-04-16",
+          "date_start": "2024-04-01",
+          "end_amount": "67770",
+          "start_amount": "0",
+          "total_expense": "0",
+          "total_income": "67770"
+        }
+      ],
+      "number": "40802000000000000013"
+    }
+  },
+  "documents": [
+    {
+      "amount": "100",
+      "counterparty": "Петров Петр Петрович",
+      "counterparty_1": "Петров Петр Петрович",
+      "counterparty_account": "40911000000000000004",
+      "counterparty_bank1": "ПАО Сбербанк",
+      "counterparty_bic": "044525225",
+      "counterparty_cor_account": "30101000000000000005",
+      "counterparty_inn": "7700000001",
+      "counterparty_kpp": null,
+      "counterparty_ras_account": "40911000000000000004",
+      "doc_date": "2024-04-13",
+      "doc_number": "481544",
+      "doc_type": "Банковский ордер",
+      "income_date": "2024-04-13",
+      "ordering": "5",
+      "outcome_date": null,
+      "payee": "Сидоров Сидор Сидорович",
+      "payee_account": "40802000000000000013",
+      "payee_bank1": "АО \"ТИНЬКОФФ БАНК\"",
+      "payee_bic": "044525974",
+      "payee_cor_account": "30101000000000000008",
+      "payee_inn": "260000000005",
+      "payee_kpp": "3",
+      "payee_ras_account": "40802000000000000013",
+      "payment_type": "17",
+      "purpose": "Оплата по договору"
+    },
+    {
+      "amount": "1000",
+      "counterparty": "Петрова Галина Леонидовна",
+      "counterparty_1": "Петрова Галина Леонидовна",
+      "counterparty_account": "30233000000000000010",
+      "counterparty_bank1": "АО \"АЛЬФА-БАНК\"",
+      "counterparty_bic": "044525593",
+      "counterparty_cor_account": "30101000000000000011",
+      "counterparty_inn": "7700000004",
+      "counterparty_kpp": null,
+      "counterparty_ras_account": "30233000000000000010",
+      "doc_date": "2024-04-13",
+      "doc_number": "481555",
+      "doc_type": "Банковский ордер",
+      "income_date": "2024-04-13",
+      "ordering": "5",
+      "outcome_date": null,
+      "payee": "Сидоров Сидор Сидорович",
+      "payee_account": "40802000000000000013",
+      "payee_bank1": "АО \"ТИНЬКОФФ БАНК\"",
+      "payee_bic": "044525974",
+      "payee_cor_account": "30101000000000000008",
+      "payee_inn": "260000000005",
+      "payee_kpp": "3",
+      "payee_ras_account": "40802000000000000013",
+      "payment_type": "17",
+      "purpose": "Перевод средств"
+    }
+  ],
+  "encoding": "cp1251",
+  "header": {
+    "ВерсияФормата": "1.02",
+    "ВремяСоздания": "15:36:40",
+    "ДатаКонца": "16.04.2024",
+    "ДатаНачала": "02.04.2024",
+    "ДатаСоздания": "16.04.2024",
+    "Кодировка": "Windows",
+    "Отправитель": "Tinkoff",
+    "Получатель": "Иванов Иван Иванович",
+    "РасчСчет": "40802000000000000013"
+  },
+  "warnings": []
+}

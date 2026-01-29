@@ -1,0 +1,37 @@
+[package]
+name = "odin_palace_py"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tochka"]
+description = "Python bindings for odin_palace 1C bank statement parser"
+license = "MIT"
+
+[lib]
+name = "odin_palace_py"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.26", features = ["extension-module", "generate-import-lib"] }
+odin_palace = { git = "https://github.com/tochka-public/odin_palace.git", rev = "2960a6ae" }
+
+[profile.release]
+strip = true
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+
+[lints.rust]
+warnings = "deny"
+
+[lints.clippy]
+style = "deny"
+perf = "deny"
+all = "deny"
+pedantic = "deny"
+unwrap_used = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+fallible_impl_from = "deny"
+wildcard_enum_match_arm = "deny"
+fn_params_excessive_bools = "deny"
+must_use_candidate = "deny"

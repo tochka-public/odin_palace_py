@@ -1,0 +1,8 @@
+{
+  "context": "account",
+  "error_type": "SyntaxError",
+  "found": "СекцияДокумент=Банковский ордер",
+  "kind": "unexpected_section",
+  "lineno": 20,
+  "message": "Unexpected section 'СекцияДокумент=Банковский ордер' in context 'account'"
+}

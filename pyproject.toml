@@ -1,0 +1,101 @@
+[build-system]
+requires = ["maturin>=1.9.3"]
+build-backend = "maturin"
+
+[project]
+name = "odin_palace_py"
+description = "Python bindings for odin_palace 1C bank statement parser"
+requires-python = ">=3.10"
+dependencies = []
+license = "MIT"
+readme = "README.md"
+authors = [
+    { name = "Tochka" },
+]
+keywords = ["1c", "bank", "statement", "parser", "1CClientBankExchange"]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Office/Business :: Financial :: Accounting",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/tochka-public/odin_palace_py"
+Repository = "https://github.com/tochka-public/odin_palace_py"
+Issues = "https://github.com/tochka-public/odin_palace_py/issues"
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+python-source = "python"
+
+[dependency-groups]
+dev = [
+    "maturin>=1.9.3",
+    "pytest>=8.0.0",
+    "ruff>=0.9.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+    "UP",
+    "B",
+    "C4",
+    "SIM",
+    "ISC",
+    "D",
+    "S",
+    "RUF",
+    "C90",
+]
+ignore = [
+    "E501",
+    "D107",
+    "D101",
+    "D415",
+    "D100",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101",
+    "S301",
+    "S311",
+    "D",
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+"**/__init__.py" = [
+    "D104",
+]
+"**/*.pyi" = [
+    "RUF001",
+    "RUF002",
+    "RUF003",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

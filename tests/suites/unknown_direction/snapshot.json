@@ -1,0 +1,86 @@
+{
+  "accounts": {
+    "40802000000000000011": {
+      "intervals": [
+        {
+          "date_end": "2024-02-29",
+          "date_start": "2024-02-29",
+          "end_amount": "310287.7",
+          "start_amount": "107728.7",
+          "total_expense": "4900",
+          "total_income": "207459"
+        }
+      ],
+      "number": "40802000000000000011"
+    }
+  },
+  "documents": [
+    {
+      "amount": "4900",
+      "counterparty": "Петров Петр Петрович",
+      "counterparty_1": "Петров Петр Петрович",
+      "counterparty_account": "40802000000000000011",
+      "counterparty_bank1": "Пермский Филиал АО ЮниКредит Банка",
+      "counterparty_bic": "045773873",
+      "counterparty_cor_account": null,
+      "counterparty_inn": "180000000005",
+      "counterparty_kpp": "590000002",
+      "counterparty_ras_account": null,
+      "doc_date": "2024-02-29",
+      "doc_number": "6502",
+      "doc_type": "Платежное поручение",
+      "income_date": null,
+      "ordering": "",
+      "outcome_date": "2024-02-29",
+      "payee": "Сидоров Сидор Сидорович",
+      "payee_account": "70601000000000000006",
+      "payee_bank1": "Пермский Филиал АО ЮниКредит Банка",
+      "payee_bic": "045773873",
+      "payee_cor_account": null,
+      "payee_inn": "7700000003",
+      "payee_kpp": "590000002",
+      "payee_ras_account": "70601000000000000006",
+      "payment_type": "09",
+      "purpose": "Оплата по договору"
+    },
+    {
+      "amount": "207459",
+      "counterparty": "Петрова Галина Леонидовна",
+      "counterparty_1": "Петрова Галина Леонидовна",
+      "counterparty_account": "006780000008",
+      "counterparty_bank1": "NEW YORK NY USA",
+      "counterparty_bic": "",
+      "counterparty_cor_account": null,
+      "counterparty_inn": "4",
+      "counterparty_kpp": "4",
+      "counterparty_ras_account": null,
+      "doc_date": "2024-02-29",
+      "doc_number": "FDC240",
+      "doc_type": "Платежное поручение",
+      "income_date": "2024-02-29",
+      "ordering": "",
+      "outcome_date": null,
+      "payee": "Кузнецова Мария Сергеевна",
+      "payee_account": "40802000000000000011",
+      "payee_bank1": "UniCredit Bank",
+      "payee_bic": "",
+      "payee_cor_account": null,
+      "payee_inn": "180000000005",
+      "payee_kpp": "4",
+      "payee_ras_account": "40802000000000000011",
+      "payment_type": "01",
+      "purpose": "Перевод средств"
+    }
+  ],
+  "encoding": "cp1251",
+  "header": {
+    "ВерсияФормата": "1.03",
+    "ДатаКонца": "29.02.2024",
+    "ДатаНачала": "29.02.2024",
+    "ДатаСоздания": "29.02.2024",
+    "Кодировка": "Windows",
+    "Получатель": "Иванов Иван Иванович",
+    "РасчСчет": "40802000000000000011"
+  },
+  "warnings": []
+}

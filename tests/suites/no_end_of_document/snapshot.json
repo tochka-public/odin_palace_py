@@ -1,0 +1,8 @@
+{
+  "context": "document",
+  "error_type": "SyntaxError",
+  "found": "КонецФайла",
+  "kind": "unexpected_section",
+  "lineno": 46,
+  "message": "Unexpected section 'КонецФайла' in context 'document'"
+}

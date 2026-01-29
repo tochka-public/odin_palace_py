@@ -1,0 +1,448 @@
+{
+  "accounts": {
+    "40802000000000000055": {
+      "intervals": [
+        {
+          "date_end": "2024-04-01",
+          "date_start": "2024-04-01",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-02",
+          "date_start": "2024-04-02",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-03",
+          "date_start": "2024-04-03",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-04",
+          "date_start": "2024-04-04",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-05",
+          "date_start": "2024-04-05",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-06",
+          "date_start": "2024-04-06",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-07",
+          "date_start": "2024-04-07",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-08",
+          "date_start": "2024-04-08",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-09",
+          "date_start": "2024-04-09",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-10",
+          "date_start": "2024-04-10",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-11",
+          "date_start": "2024-04-11",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-12",
+          "date_start": "2024-04-12",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-13",
+          "date_start": "2024-04-13",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-14",
+          "date_start": "2024-04-14",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-15",
+          "date_start": "2024-04-15",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-16",
+          "date_start": "2024-04-16",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-17",
+          "date_start": "2024-04-17",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-18",
+          "date_start": "2024-04-18",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-19",
+          "date_start": "2024-04-19",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-20",
+          "date_start": "2024-04-20",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-21",
+          "date_start": "2024-04-21",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-22",
+          "date_start": "2024-04-22",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-23",
+          "date_start": "2024-04-23",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-24",
+          "date_start": "2024-04-24",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-25",
+          "date_start": "2024-04-25",
+          "end_amount": "49",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-26",
+          "date_start": "2024-04-26",
+          "end_amount": "158703.52",
+          "start_amount": "49",
+          "total_expense": "0",
+          "total_income": "158654.52"
+        },
+        {
+          "date_end": "2024-04-27",
+          "date_start": "2024-04-27",
+          "end_amount": "18703.52",
+          "start_amount": "158703.52",
+          "total_expense": "140000",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-28",
+          "date_start": "2024-04-28",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-29",
+          "date_start": "2024-04-29",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-04-30",
+          "date_start": "2024-04-30",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-01",
+          "date_start": "2024-05-01",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-02",
+          "date_start": "2024-05-02",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-03",
+          "date_start": "2024-05-03",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-04",
+          "date_start": "2024-05-04",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-05",
+          "date_start": "2024-05-05",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-06",
+          "date_start": "2024-05-06",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-07",
+          "date_start": "2024-05-07",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-08",
+          "date_start": "2024-05-08",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-09",
+          "date_start": "2024-05-09",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-10",
+          "date_start": "2024-05-10",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-11",
+          "date_start": "2024-05-11",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-12",
+          "date_start": "2024-05-12",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-13",
+          "date_start": "2024-05-13",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-14",
+          "date_start": "2024-05-14",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-15",
+          "date_start": "2024-05-15",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        },
+        {
+          "date_end": "2024-05-16",
+          "date_start": "2024-05-16",
+          "end_amount": "18703.52",
+          "start_amount": "18703.52",
+          "total_expense": "0",
+          "total_income": "0"
+        }
+      ],
+      "number": "40802000000000000055"
+    }
+  },
+  "documents": [
+    {
+      "amount": "158654.52",
+      "counterparty": "Петров Петр Петрович",
+      "counterparty_1": null,
+      "counterparty_account": "40702000000000000049",
+      "counterparty_bank1": "Ф-Л \"СЕВЕРНАЯ СТОЛИЦА\" АО \"РАЙФФАЙЗЕНБАНК\", г.Санкт-Петербург",
+      "counterparty_bic": "044030723",
+      "counterparty_cor_account": "30101000000000000050",
+      "counterparty_inn": "7800000001",
+      "counterparty_kpp": "5",
+      "counterparty_ras_account": "40702000000000000049",
+      "doc_date": "2024-04-26",
+      "doc_number": "643",
+      "doc_type": "Платежное поручение",
+      "income_date": "2024-04-26",
+      "ordering": "5",
+      "outcome_date": null,
+      "payee": "Сидоров Сидор Сидорович",
+      "payee_account": "40802000000000000055",
+      "payee_bank1": "СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК, г.Санкт-Петербург",
+      "payee_bic": "044030653",
+      "payee_cor_account": "30101000000000000053",
+      "payee_inn": "600000000004",
+      "payee_kpp": "5",
+      "payee_ras_account": "40802000000000000055",
+      "payment_type": "01",
+      "purpose": "Оплата по договору"
+    },
+    {
+      "amount": "140000",
+      "counterparty": "Петрова Галина Леонидовна",
+      "counterparty_1": null,
+      "counterparty_account": "40802000000000000055",
+      "counterparty_bank1": "СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК, г.Санкт-Петербург",
+      "counterparty_bic": "044030653",
+      "counterparty_cor_account": "30101000000000000053",
+      "counterparty_inn": "600000000004",
+      "counterparty_kpp": "5",
+      "counterparty_ras_account": "40802000000000000055",
+      "doc_date": "2024-04-27",
+      "doc_number": "1",
+      "doc_type": "Платежное поручение",
+      "income_date": null,
+      "ordering": "5",
+      "outcome_date": "2024-04-27",
+      "payee": "Кузнецова Мария Сергеевна",
+      "payee_account": "40817000000000000057",
+      "payee_bank1": "СЕВЕРО-ЗАПАДНЫЙ БАНК ПАО СБЕРБАНК, г.Санкт-Петербург",
+      "payee_bic": "044030653",
+      "payee_cor_account": "30101000000000000053",
+      "payee_inn": "5",
+      "payee_kpp": "5",
+      "payee_ras_account": "40817000000000000057",
+      "payment_type": "01",
+      "purpose": "Перевод средств"
+    }
+  ],
+  "encoding": "cp1251",
+  "header": {
+    "ВерсияФормата": "1.03",
+    "ВремяСоздания": "14:36:45",
+    "ДатаКонца": "16.05.2024",
+    "ДатаНачала": "01.04.2024",
+    "ДатаСоздания": "16.05.2024",
+    "Кодировка": "Windows",
+    "Отправитель": "Сбербанк Бизнес Онлайн",
+    "Получатель": "Иванов Иван Иванович",
+    "РасчСчет": "40802000000000000055"
+  },
+  "warnings": []
+}
