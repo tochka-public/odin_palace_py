@@ -14,13 +14,13 @@ pip install odin_palace_py
 ## Быстрый старт
 
 ```python
-from odin_palace_py import parse
+from odin_palace_py import Statement, parse
 
 # Чтение файла выписки (CP1251 или UTF-8)
 with open("statement.txt", "rb") as f:
-    data = f.read()
+    data: bytes = f.read()
 
-statement = parse(data)
+statement: Statement = parse(data)
 
 print(f"Кодировка: {statement.encoding}")
 print(f"Заголовок: {statement.header}")
@@ -76,8 +76,8 @@ except ParseError as e:
 
 Объект `SyntaxError.detail` содержит типизированную информацию об ошибке:
 
-| Тип                 | Поля                       | Описание                        |
-|----------------------|----------------------------|---------------------------------|
+| Тип                  | Поля                         | Описание                        |
+|----------------------|------------------------------|---------------------------------|
 | `UnexpectedSection`  | `lineno`, `found`, `context` | Неожиданная секция              |
 | `UnexpectedAttribute`| `lineno`, `key`, `value`     | Неожиданный атрибут             |
 | `UnrecognizedLine`   | `lineno`, `line`             | Нераспознанная строка           |
@@ -88,19 +88,30 @@ except ParseError as e:
 
 ## Hooks
 
-Hooks позволяют модифицировать данные секций во время парсинга:
+Hooks позволяют модифицировать атрибуты секций перед тем, как парсер создаст
+из них объекты `Document` или `Account`.
+
+Hook вызывается **после того, как секция полностью прочитана** (парсер встретил
+маркер `КонецДокумента` или `КонецРасчСчет`), но **до того, как атрибуты
+обработаны** и добавлены в итоговый `Statement`. Это значит, что hook получает
+все накопленные ключ-значение пары секции целиком и может их изменить до
+финальной обработки.
+
+Порядок вызова:
+
+1. Парсер читает строки секции, накапливая атрибуты в словарь.
+2. Парсер встречает конец секции (`КонецДокумента` / `КонецРасчСчет`).
+3. **Вызываются все hooks** по порядку, каждый получает собранный словарь атрибутов.
+4. Парсер создаёт `Document` или `Account` из (возможно изменённых) атрибутов.
 
 ```python
 from odin_palace_py import parse, SectionType
 
-def my_hook(section_type, attrs, header):
-    """Модификация атрибутов секции перед обработкой.
-
-    Args:
-        section_type: SectionType.Document или SectionType.Account
-        attrs: словарь атрибутов секции (можно изменять)
-        header: словарь заголовка выписки (только для чтения)
-    """
+def my_hook(
+    section_type: SectionType,
+    attrs: dict[str, str],
+    header: dict[str, str],
+) -> None:
     if section_type == SectionType.Document:
         # Подменить назначение платежа
         if "НазначениеПлатежа" in attrs:
@@ -108,6 +119,9 @@ def my_hook(section_type, attrs, header):
 
 statement = parse(data, hooks=[my_hook])
 ```
+
+Если hook выбросит исключение, парсинг прервётся с `SyntaxError`,
+а `detail` будет содержать объект `HookError`.
 
 ## Поддерживаемые версии Python
 
