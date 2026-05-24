@@ -29,11 +29,15 @@ jobs:
       fail-fast: false
       matrix:
         platform:
+          # x86_64 is native to the runner, so `container: auto` picks a PyPA
+          # image without a free-threaded build. Pin the rust-cross image (the
+          # one maturin-action already uses for cross targets) which ships
+          # cp314t. Cross targets get it from `auto` automatically.
           - target: x86_64
-            container: quay.io/pypa/manylinux_2_28_x86_64:latest
+            container: ghcr.io/rust-cross/manylinux_2_28-cross:x86_64
             manylinux: "2_28"
           - target: aarch64
-            container: quay.io/pypa/manylinux_2_28_aarch64:latest
+            container: auto
             manylinux: "2_28"
           - target: ppc64le
             container: auto
@@ -49,12 +53,6 @@ jobs:
             manylinux: auto
     steps:
       - uses: actions/checkout@v6
-      # The custom aarch64 container is foreign to the x86_64 runner; register
-      # QEMU binfmt handlers so Docker can execute it under emulation. Other
-      # targets let maturin-action manage cross setup with its default image.
-      - name: Set up QEMU
-        if: ${{ matrix.platform.target == 'aarch64' }}
-        uses: docker/setup-qemu-action@v3
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
