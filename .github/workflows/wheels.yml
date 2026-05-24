@@ -4,10 +4,17 @@ name: wheels
 # release-please.yml (release). Artifacts are uploaded as `wheels-*` and are
 # available to subsequent jobs of the calling workflow run.
 #
-# Linux/musllinux build inside a manylinux container that ships every CPython,
-# so `--find-interpreter` discovers cp3.x + free-threaded (cp3.13t/cp3.14t)
-# automatically for pyo3 >= 0.23. macOS/Windows have no container, so the
-# interpreters are installed explicitly via setup-python.
+# Target interpreter set: CPython 3.10–3.14 + free-threaded 3.14t.
+#
+# - macOS/Windows: setup-python installs exactly the wanted interpreters.
+#   Regular and free-threaded go in SEPARATE steps — listing e.g. `3.14` and
+#   `3.14t` together makes setup-python dedupe by major.minor and the
+#   free-threaded build wins, dropping the regular one.
+# - Linux/musllinux: build in a manylinux/musllinux container and discover
+#   interpreters with `--find-interpreter`. The images ship extras (cp315
+#   pre-release, experimental cp313t, PyPy), so a filter step drops the ones
+#   we do not publish. cp314t requires manylinux_2_28 (manylinux2014 has no
+#   free-threaded build); armv7/x86 have no 2_28 image → regular wheels only.
 
 on:
   workflow_call:
@@ -23,16 +30,22 @@ jobs:
         platform:
           - runner: ubuntu-22.04
             target: x86_64
-          - runner: ubuntu-22.04
-            target: x86
+            manylinux: "2_28"
           - runner: ubuntu-22.04
             target: aarch64
-          - runner: ubuntu-22.04
-            target: armv7
-          - runner: ubuntu-22.04
-            target: s390x
+            manylinux: "2_28"
           - runner: ubuntu-22.04
             target: ppc64le
+            manylinux: "2_28"
+          - runner: ubuntu-22.04
+            target: s390x
+            manylinux: "2_28"
+          - runner: ubuntu-22.04
+            target: armv7
+            manylinux: auto
+          - runner: ubuntu-22.04
+            target: x86
+            manylinux: auto
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -44,7 +57,9 @@ jobs:
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
-          manylinux: auto
+          manylinux: ${{ matrix.platform.manylinux }}
+      - name: Drop unpublished interpreters (cp315 pre-release, experimental cp313t)
+        run: rm -f dist/*cp315* dist/*cp313t*
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
@@ -76,6 +91,8 @@ jobs:
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
+      - name: Drop unpublished interpreters (cp315 pre-release, experimental cp313t)
+        run: rm -f dist/*cp315* dist/*cp313t*
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
@@ -89,27 +106,25 @@ jobs:
         platform:
           - runner: windows-latest
             target: x64
-            python: |
-              3.10
-              3.11
-              3.12
-              3.13
-              3.13t
-              3.14
-              3.14t
+            freethreaded: true
           - runner: windows-latest
             target: x86
-            python: |
-              3.10
-              3.11
-              3.12
-              3.13
-              3.14
+            freethreaded: false
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.platform.python }}
+          python-version: |
+            3.10
+            3.11
+            3.12
+            3.13
+            3.14
+          architecture: ${{ matrix.platform.target }}
+      - uses: actions/setup-python@v6
+        if: ${{ matrix.platform.freethreaded }}
+        with:
+          python-version: "3.14t"
           architecture: ${{ matrix.platform.target }}
       - name: Build wheels
         uses: PyO3/maturin-action@v1
@@ -141,9 +156,10 @@ jobs:
             3.11
             3.12
             3.13
-            3.13t
             3.14
-            3.14t
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14t"
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
