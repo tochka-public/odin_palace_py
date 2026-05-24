@@ -21,7 +21,7 @@ create_exception!(odin_palace_py, SyntaxError, ParseError);
 // ============================================================================
 
 /// Тип секции выписки для использования в hooks.
-#[pyclass(frozen, eq, module = "odin_palace_py")]
+#[pyclass(frozen, eq, skip_from_py_object, module = "odin_palace_py")]
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum SectionType {
     /// Секция документа
@@ -54,7 +54,7 @@ impl From<RustSectionType> for SectionType {
 // Классы PyO3
 // ============================================================================
 
-#[pyclass(frozen, eq, get_all)]
+#[pyclass(frozen, eq, get_all, skip_from_py_object)]
 #[derive(Clone, PartialEq)]
 pub struct Interval {
     pub date_start: String,
@@ -75,7 +75,7 @@ impl Interval {
     }
 }
 
-#[pyclass(frozen, eq, get_all)]
+#[pyclass(frozen, eq, get_all, skip_from_py_object)]
 #[derive(Clone, PartialEq)]
 pub struct Account {
     pub number: String,
@@ -93,7 +93,7 @@ impl Account {
     }
 }
 
-#[pyclass(frozen, eq, get_all)]
+#[pyclass(frozen, eq, get_all, skip_from_py_object)]
 #[derive(Clone, PartialEq)]
 pub struct Document {
     pub doc_number: String,
@@ -187,7 +187,7 @@ impl Statement {
 /// Генерирует detail-класс с полями `lineno` и `message`.
 macro_rules! detail_lineno_message {
     ($name:ident) => {
-        #[pyclass(frozen, get_all, module = "odin_palace_py")]
+        #[pyclass(frozen, get_all, skip_from_py_object, module = "odin_palace_py")]
         #[derive(Clone)]
         pub struct $name {
             pub lineno: usize,
@@ -220,7 +220,7 @@ macro_rules! detail_lineno_message {
 /// Генерирует detail-класс с полями `lineno` и двумя именованными String-полями.
 macro_rules! detail_lineno_two_strings {
     ($name:ident, $field1:ident, $field2:ident) => {
-        #[pyclass(frozen, get_all, module = "odin_palace_py")]
+        #[pyclass(frozen, get_all, skip_from_py_object, module = "odin_palace_py")]
         #[derive(Clone)]
         pub struct $name {
             pub lineno: usize,
@@ -263,7 +263,7 @@ macro_rules! detail_lineno_two_strings {
 /// Генерирует detail-класс с полями `lineno` и одним именованным String-полем.
 macro_rules! detail_lineno_one_string {
     ($name:ident, $field:ident) => {
-        #[pyclass(frozen, get_all, module = "odin_palace_py")]
+        #[pyclass(frozen, get_all, skip_from_py_object, module = "odin_palace_py")]
         #[derive(Clone)]
         pub struct $name {
             pub lineno: usize,
@@ -563,10 +563,10 @@ fn parse(
                                 attrs.clear();
                                 for (key, value) in py_attrs.iter() {
                                     let k: String = key
-                                        .extract()
+                                        .extract::<String>()
                                         .map_err(|e| RustHookError::Error(e.to_string()))?;
                                     let v: String = value
-                                        .extract()
+                                        .extract::<String>()
                                         .map_err(|e| RustHookError::Error(e.to_string()))?;
                                     attrs.insert(k, v);
                                 }
