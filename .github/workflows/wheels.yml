@@ -29,28 +29,42 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          # x86_64 is native to the runner, so `container: auto` picks a PyPA
-          # image without a free-threaded build. Pin the rust-cross image (the
-          # one maturin-action already uses for cross targets) which ships
-          # cp314t. Cross targets get it from `auto` automatically.
+          # x86_64 is native to the runner. `container: auto` picks a PyPA
+          # image with no free-threaded build, and even on the rust-cross image
+          # `--find-interpreter` resolves the regular /usr/bin/python3.x and
+          # never reaches the free-threaded /opt/python interpreters. So pin the
+          # rust-cross image (it ships cp314t) and list interpreters explicitly.
+          # Cross targets discover /opt/python (incl. cp314t) fine via `auto`.
           - target: x86_64
             container: ghcr.io/rust-cross/manylinux_2_28-cross:x86_64
             manylinux: "2_28"
+            interpreters: >-
+              -i /opt/python/cp310-cp310/bin/python3.10
+              /opt/python/cp311-cp311/bin/python3.11
+              /opt/python/cp312-cp312/bin/python3.12
+              /opt/python/cp313-cp313/bin/python3.13
+              /opt/python/cp314-cp314/bin/python3.14
+              /opt/python/cp314-cp314t/bin/python3.14t
           - target: aarch64
             container: auto
             manylinux: "2_28"
+            interpreters: --find-interpreter
           - target: ppc64le
             container: auto
             manylinux: "2_28"
+            interpreters: --find-interpreter
           - target: s390x
             container: auto
             manylinux: "2_28"
+            interpreters: --find-interpreter
           - target: armv7
             container: auto
             manylinux: auto
+            interpreters: --find-interpreter
           - target: x86
             container: auto
             manylinux: auto
+            interpreters: --find-interpreter
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -60,7 +74,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          args: --release --out dist --find-interpreter
+          args: --release --out dist ${{ matrix.platform.interpreters }}
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           container: ${{ matrix.platform.container }}
