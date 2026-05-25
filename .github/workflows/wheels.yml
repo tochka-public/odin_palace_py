@@ -157,12 +157,14 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: x64
-          # Build ONLY the interpreter set up above (3.14t). `--find-interpreter`
-          # would also pick up the runner's preinstalled CPythons and emit
-          # duplicate cp310–cp313 wheels that collide with the regular job's
-          # artifacts during merge, corrupting them ("ZIP Trailing data").
-          args: --release --out dist -i python
+          args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
+      # find-interpreter also builds the runner's preinstalled regular CPythons,
+      # whose filenames collide with the regular job's artifacts and corrupt
+      # them on merge ("ZIP Trailing data"). Keep only the free-threaded wheel.
+      - name: Keep only free-threaded wheels
+        shell: bash
+        run: find dist -name '*.whl' ! -name '*cp314t*' -delete
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
@@ -220,11 +222,14 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.platform.target }}
-          # Build ONLY 3.14t (set up above). `--find-interpreter` would also
-          # grab the runner's preinstalled CPythons, duplicating the regular
-          # job's wheels and corrupting them on merge ("ZIP Trailing data").
-          args: --release --out dist -i python
+          args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
+      # find-interpreter also builds the runner's preinstalled regular CPythons,
+      # whose filenames collide with the regular job's artifacts and corrupt
+      # them on merge ("ZIP Trailing data"). Keep only the free-threaded wheel.
+      - name: Keep only free-threaded wheels
+        shell: bash
+        run: find dist -name '*.whl' ! -name '*cp314t*' -delete
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
