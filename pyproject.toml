@@ -41,6 +41,7 @@ python-source = "python"
 [dependency-groups]
 dev = [
     "maturin>=1.13,<2.0",
+    "mypy>=1.19",
     "pytest>=9.0",
     "ruff>=0.15",
 ]
@@ -48,36 +49,44 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.mypy]
+strict = true
+files = ["python", "tests", "benchmarks"]
+
+[[tool.mypy.overrides]]
+# tests/ — без __init__.py, поэтому модуль называется test_*
+module = ["tests.*", "test_parse"]
+# тестам разрешён нетипизированный код — сигнатуры хуков и хелперов
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_any_generics = false
+disable_error_code = ["comparison-overlap"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 
 [tool.ruff.lint]
-select = [
-    "E",
-    "F",
-    "I",
-    "UP",
-    "B",
-    "C4",
-    "SIM",
-    "ISC",
-    "D",
-    "S",
-    "RUF",
-    "C90",
-]
+select = ["ALL"]
 ignore = [
+    # конфликтуют с ruff format
+    "COM812",
+    "ISC001",
+    # длина строки — на усмотрение форматтера
     "E501",
-    "D107",
-    "D101",
-    "D415",
+    # докстринги не обязательны для каждого файла/класса/__init__
     "D100",
+    "D101",
+    "D104",
+    "D107",
+    "D415",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "benchmarks/**/*.py" = [
     "D103",
+    "T201",
+    "INP001",
     "RUF001",
     "RUF002",
     "RUF003",
@@ -87,14 +96,27 @@ ignore = [
     "S301",
     "S311",
     "D",
+    "ANN",
+    "ARG001",  # хуки обязаны принимать все аргументы сигнатуры
+    "A004",    # SyntaxError импортируется намеренно (публичный API)
+    "EM101",
+    "EM102",
+    "TRY003",
+    "INP001",
+    "PLR0911",
+    "PLR2004",
     "RUF001",
     "RUF002",
     "RUF003",
 ]
 "**/__init__.py" = [
     "D104",
+    "A004",  # реэкспорт SyntaxError — часть публичного API
 ]
 "**/*.pyi" = [
+    "A001",    # класс SyntaxError — часть публичного API
+    "PYI021",  # докстринги в stub оставлены намеренно (подсказки в IDE)
+    "PYI048",
     "RUF001",
     "RUF002",
     "RUF003",

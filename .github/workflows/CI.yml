@@ -63,6 +63,9 @@ jobs:
         run: |
           uv run maturin develop
 
+      - name: Python type check (mypy strict)
+        run: uv run mypy
+
       - name: Python tests (pytest)
         run: uv run pytest tests/ -v
 

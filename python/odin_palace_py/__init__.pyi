@@ -160,22 +160,14 @@ class SectionType(Enum):
 class ParseError(Exception):
     """Базовое исключение для всех ошибок парсинга."""
 
-    ...
-
 class NotStatementError(ParseError):
     """Входные данные не являются выпиской 1C."""
-
-    ...
 
 class EmptyInputError(ParseError):
     """Входные данные пусты."""
 
-    ...
-
 class UnfinishedError(ParseError):
     """Выписка не завершена корректно."""
-
-    ...
 
 class SyntaxError(ParseError):
     """Синтаксическая ошибка в выписке.
@@ -213,4 +205,3 @@ def parse(
         ParseError: Для прочих ошибок парсинга
         TypeError: Если входные данные не bytes и не str
     """
-    ...

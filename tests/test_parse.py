@@ -74,12 +74,12 @@ def to_dict(obj: Any) -> Any:
             "header": dict(obj.header),
             "warnings": [list(w) for w in obj.warnings],
         }
-    elif isinstance(obj, Account):
+    if isinstance(obj, Account):
         return {
             "intervals": [to_dict(i) for i in obj.intervals],
             "number": obj.number,
         }
-    elif isinstance(obj, Interval):
+    if isinstance(obj, Interval):
         return {
             "date_end": obj.date_end,
             "date_start": obj.date_start,
@@ -88,7 +88,7 @@ def to_dict(obj: Any) -> Any:
             "total_expense": obj.total_expense,
             "total_income": obj.total_income,
         }
-    elif isinstance(obj, Document):
+    if isinstance(obj, Document):
         return {
             "amount": obj.amount,
             "compiler_status": obj.compiler_status,
@@ -144,12 +144,11 @@ def to_dict(obj: Any) -> Any:
             "tax_type": obj.tax_type,
             "uin": obj.uin,
         }
-    elif isinstance(obj, dict):
+    if isinstance(obj, dict):
         return {k: to_dict(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
+    if isinstance(obj, list):
         return [to_dict(item) for item in obj]
-    else:
-        return obj
+    return obj
 
 
 def serialize_result(result: Statement | dict) -> str:
@@ -292,13 +291,13 @@ def test_parse_str_vs_bytes_same_result():
 def test_parse_invalid_type():
     """Тест что передача неверного типа вызывает TypeError."""
     with pytest.raises(TypeError, match="statement must be bytes or str"):
-        parse(12345)
+        parse(12345)  # type: ignore[arg-type]
 
     with pytest.raises(TypeError, match="statement must be bytes or str"):
-        parse(["list", "of", "strings"])
+        parse(["list", "of", "strings"])  # type: ignore[arg-type]
 
     with pytest.raises(TypeError, match="statement must be bytes or str"):
-        parse(None)
+        parse(None)  # type: ignore[arg-type]
 
 
 def test_syntax_error_detail_types():
@@ -442,6 +441,7 @@ def test_syntax_error_detail_pickle():
     assert restored_detail.lineno == original_detail.lineno
 
     if isinstance(original_detail, UnexpectedSection):
+        assert isinstance(restored_detail, UnexpectedSection)
         assert restored_detail.found == original_detail.found
         assert restored_detail.context == original_detail.context
 

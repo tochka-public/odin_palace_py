@@ -1,0 +1,63 @@
+# Полный локальный контроль до коммита: гигиена файлов, опечатки, ruff
+# (select = ALL) + формат, mypy strict, rust fmt/clippy и тесты обоих стеков.
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        args: [--maxkb=600]
+      - id: end-of-file-fixer
+        exclude: '^tests/suites/'
+      - id: trailing-whitespace
+        exclude: '^tests/suites/'
+      - id: mixed-line-ending
+        args: [--fix=lf]
+        exclude: '^tests/suites/'
+
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.49.0
+    hooks:
+      - id: typos
+        exclude: '^tests/suites/'
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+      - id: ruff-format
+        name: ruff format --check
+        entry: uv run ruff format --check --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+      - id: mypy
+        name: mypy (strict)
+        entry: uv run mypy
+        language: system
+        types_or: [python, pyi]
+        pass_filenames: false
+      - id: cargo-fmt
+        name: cargo fmt --check
+        entry: cargo fmt --all --check
+        language: system
+        types: [rust]
+        pass_filenames: false
+      - id: cargo-clippy
+        name: cargo clippy (all targets, -D warnings)
+        entry: cargo clippy --all-targets --all-features -- -D warnings
+        language: system
+        types: [rust]
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: uv run pytest tests/ -q
+        language: system
+        types_or: [python, pyi, rust]
+        pass_filenames: false
