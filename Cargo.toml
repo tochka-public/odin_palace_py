@@ -1,7 +1,7 @@
 [package]
 name = "odin_palace_py"
 version = "0.1.2"
-edition = "2021"
+edition = "2024"
 authors = ["Tochka"]
 description = "Python bindings for odin_palace 1C bank statement parser"
 license = "MIT"
@@ -13,7 +13,7 @@ name = "odin_palace_py"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.28", features = ["extension-module", "generate-import-lib"] }
+pyo3 = { version = "0.29", features = ["extension-module", "generate-import-lib"] }
 odin_palace = "0.2.0"
 
 [profile.release]
