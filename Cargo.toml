@@ -36,3 +36,8 @@ fallible_impl_from = "deny"
 wildcard_enum_match_arm = "deny"
 fn_params_excessive_bools = "deny"
 must_use_candidate = "deny"
+
+# Локальная разработка против исходников ядра; при публикации на crates.io
+# зависимость odin_palace в [dependencies] остаётся версионной.
+[patch.crates-io]
+odin_palace = { path = "../odin_palace" }

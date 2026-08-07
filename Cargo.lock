@@ -337,8 +337,6 @@ dependencies = [
 [[package]]
 name = "odin_palace"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43762ebf89f7ff64b6905d1289395b555a3b39105974e55aca1890aa596a9fda"
 dependencies = [
  "chrono",
  "clap",
@@ -346,7 +344,6 @@ dependencies = [
  "indexmap",
  "rust_decimal",
  "serde",
- "serde_json",
 ]
 
 [[package]]
