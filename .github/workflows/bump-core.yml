@@ -1,0 +1,66 @@
+# Однокнопочный подхват нового ядра из crates.io.
+#
+# Релизить биндинги при каждом патче ядра не обязательно: зависимость
+# каретная (odin_palace = "0.2.0" покрывает весь 0.2.x), и установка из
+# sdist подхватывает свежий патч сама. Релиз нужен только затем, чтобы
+# перевыпустить wheels — ядро вшито в них статически. Этот workflow
+# открывает PR c бампом Cargo.lock и conventional-fix коммитом; его мёрж
+# запускает обычный release-please цикл (patch-релиз + wheels + PyPI).
+#
+# Запуск: gh workflow run bump-core.yml [-f version=X.Y.Z]
+name: bump-core
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "odin_palace version to pin (empty = latest semver-compatible)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        run: rustup show
+
+      # На раннере нет соседнего чекаута ядра — резолвим против crates.io.
+      - name: Strip local-dev [patch.crates-io] for resolution
+        run: sed -i '/^\[patch\.crates-io\]$/,$d' Cargo.toml
+
+      - name: Update odin_palace in Cargo.lock
+        id: bump
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            cargo update -p odin_palace --precise "${{ inputs.version }}"
+          else
+            cargo update -p odin_palace
+          fi
+          VERSION=$(cargo metadata --format-version 1 --no-deps=false 2>/dev/null \
+            | jq -r '.packages[] | select(.name == "odin_palace") | .version')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Cargo.toml (only the lockfile is bumped)
+        run: git checkout -- Cargo.toml
+
+      - name: Open bump PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bump-core
+          title: "fix: pick up odin_palace ${{ steps.bump.outputs.version }}"
+          commit-message: |
+            fix: pick up odin_palace ${{ steps.bump.outputs.version }}
+
+            Rebuild-only bump: the caret requirement already allows this
+            version; the lockfile update makes wheels ship it.
+          body: |
+            Автоматический бамп ядра до ${{ steps.bump.outputs.version }}.
+            Мёрж запустит patch-релиз биндингов (wheels + PyPI) через release-please.
+          delete-branch: true
