@@ -20,7 +20,6 @@ odin_palace = "0.1.0"
 strip = true
 lto = "fat"
 codegen-units = 1
-panic = "abort"
 
 [lints.rust]
 warnings = "deny"
