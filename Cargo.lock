@@ -320,7 +320,9 @@ dependencies = [
 
 [[package]]
 name = "odin_palace"
-version = "0.2.0"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d696e90c453b114a29a846d14fe0cd517647589d600a55f827974ffe8c24e816"
 dependencies = [
  "chrono",
  "clap",
