@@ -67,24 +67,32 @@ jobs:
             interpreters: --find-interpreter
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: ${{ matrix.platform.target }}
           args: --release --out dist ${{ matrix.platform.interpreters }}
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: ${{ matrix.platform.manylinux }}
           container: ${{ matrix.platform.container }}
       - name: Drop unpublished interpreters (cp315 pre-release, experimental cp313t)
-        run: rm -f dist/*cp315* dist/*cp313t*
+        run: rm -f odin_palace_py/dist/*cp315* odin_palace_py/dist/*cp313t*
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
           name: wheels-linux-${{ matrix.platform.target }}
-          path: dist
+          path: odin_palace_py/dist
 
   musllinux:
     runs-on: ubuntu-22.04
@@ -98,23 +106,31 @@ jobs:
           - target: armv7
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
           manylinux: musllinux_1_2
       - name: Drop unpublished interpreters (cp315 pre-release, experimental cp313t)
-        run: rm -f dist/*cp315* dist/*cp313t*
+        run: rm -f odin_palace_py/dist/*cp315* odin_palace_py/dist/*cp313t*
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
           name: wheels-musllinux-${{ matrix.platform.target }}
-          path: dist
+          path: odin_palace_py/dist
 
   windows:
     runs-on: windows-latest
@@ -124,6 +140,13 @@ jobs:
         target: [x64, x86]
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: |
@@ -136,6 +159,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: ${{ matrix.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -143,12 +167,19 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: wheels-windows-${{ matrix.target }}
-          path: dist
+          path: odin_palace_py/dist
 
   windows-freethreaded:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: "3.14t"
@@ -156,6 +187,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: x64
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -164,12 +196,12 @@ jobs:
       # them on merge ("ZIP Trailing data"). Keep only the free-threaded wheel.
       - name: Keep only free-threaded wheels
         shell: bash
-        run: find dist -name '*.whl' ! -name '*cp314t*' -delete
+        run: find odin_palace_py/dist -name '*.whl' ! -name '*cp314t*' -delete
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
           name: wheels-windows-ft-x64
-          path: dist
+          path: odin_palace_py/dist
 
   macos:
     runs-on: ${{ matrix.platform.runner }}
@@ -183,6 +215,13 @@ jobs:
             target: aarch64
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: |
@@ -194,6 +233,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -201,7 +241,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: wheels-macos-${{ matrix.platform.target }}
-          path: dist
+          path: odin_palace_py/dist
 
   macos-freethreaded:
     runs-on: ${{ matrix.platform.runner }}
@@ -215,12 +255,20 @@ jobs:
             target: aarch64
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      - name: Checkout odin_palace core (target of [patch.crates-io])
+        uses: actions/checkout@v6
+        with:
+          repository: tochka-public/odin_palace
+          path: odin_palace
       - uses: actions/setup-python@v6
         with:
           python-version: "3.14t"
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           target: ${{ matrix.platform.target }}
           args: --release --out dist --find-interpreter
           sccache: ${{ !startsWith(github.ref, 'refs/tags/') }}
@@ -229,24 +277,35 @@ jobs:
       # them on merge ("ZIP Trailing data"). Keep only the free-threaded wheel.
       - name: Keep only free-threaded wheels
         shell: bash
-        run: find dist -name '*.whl' ! -name '*cp314t*' -delete
+        run: find odin_palace_py/dist -name '*.whl' ! -name '*cp314t*' -delete
       - name: Upload wheels
         uses: actions/upload-artifact@v6
         with:
           name: wheels-macos-ft-${{ matrix.platform.target }}
-          path: dist
+          path: odin_palace_py/dist
 
   sdist:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          path: odin_palace_py
+      # The sdist must be installable by end users who do not have a local
+      # odin_palace checkout, so the dev-only [patch.crates-io] section is
+      # stripped and the sdist resolves the core from crates.io.
+      - name: Strip local-dev [patch.crates-io] from Cargo.toml
+        working-directory: odin_palace_py
+        run: |
+          sed -i '/^\[patch\.crates-io\]$/,$d' Cargo.toml
+          ! grep -q 'patch.crates-io' Cargo.toml
       - name: Build sdist
         uses: PyO3/maturin-action@v1
         with:
+          working-directory: odin_palace_py
           command: sdist
           args: --out dist
       - name: Upload sdist
         uses: actions/upload-artifact@v6
         with:
           name: wheels-sdist
-          path: dist
+          path: odin_palace_py/dist

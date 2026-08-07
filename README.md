@@ -1,6 +1,12 @@
 # odin_palace_py
 
-Python-библиотека для парсинга банковских выписок в формате 1CClientBankExchange.
+[![PyPI](https://img.shields.io/pypi/v/odin_palace_py.svg)](https://pypi.org/project/odin_palace_py/)
+[![Python versions](https://img.shields.io/pypi/pyversions/odin_palace_py.svg)](https://pypi.org/project/odin_palace_py/)
+[![CI](https://github.com/tochka-public/odin_palace_py/actions/workflows/CI.yml/badge.svg)](https://github.com/tochka-public/odin_palace_py/actions/workflows/CI.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Python-библиотека для парсинга банковских выписок в формате
+[1CClientBankExchange](https://v8.1c.ru/tekhnologii/obmen-dannymi-i-integratsiya/standarty-i-formaty/standart-obmena-s-sistemami-klient-banka/formaty-obmena/).
 
 Ядро написано на Rust ([odin_palace](https://github.com/tochka-public/odin_palace)),
 Python-обёртка построена с помощью [PyO3](https://pyo3.rs) и [Maturin](https://www.maturin.rs).
@@ -30,8 +36,8 @@ print(f"Счетов: {len(statement.accounts)}")
 for doc in statement.documents:
     print(f"  #{doc.doc_number} от {doc.doc_date} на сумму {doc.amount}")
     print(f"    Назначение: {doc.purpose}")
-    print(f"    Плательщик: {doc.payee_inn} ({doc.payee})")
-    print(f"    Контрагент: {doc.counterparty_inn} ({doc.counterparty})")
+    print(f"    Плательщик: {doc.counterparty_inn} ({doc.counterparty})")
+    print(f"    Получатель: {doc.payee_inn} ({doc.payee})")
 ```
 
 ## Работа со счетами
@@ -47,7 +53,13 @@ for number, account in statement.accounts.items():
 
 ## Обработка ошибок
 
-Библиотека предоставляет иерархию исключений для различных ситуаций:
+Библиотека предоставляет иерархию исключений для различных ситуаций.
+
+> **Внимание:** класс `odin_palace_py.SyntaxError` перекрывает встроенный
+> `builtins.SyntaxError`. Импортируйте его под псевдонимом
+> (`from odin_palace_py import SyntaxError as StatementSyntaxError`), если в том
+> же модуле нужен встроенный `SyntaxError`. Имя сохранено ради обратной
+> совместимости.
 
 ```python
 from odin_palace_py import (
@@ -125,8 +137,32 @@ statement = parse(data, hooks=[my_hook])
 
 ## Поддерживаемые версии Python
 
-- CPython 3.10+
+- CPython 3.10+ (включая free-threaded 3.14t)
 - PyPy 3.10+
+
+На время парсинга без hooks GIL отпускается, поэтому `parse` из нескольких
+потоков выполняется параллельно.
+
+## Разработка
+
+Репозиторий ожидает локальный checkout ядра рядом:
+
+```
+parent/
+├── odin_palace/     # ядро (Rust)
+└── odin_palace_py/  # этот репозиторий
+```
+
+Секция `[patch.crates-io]` в `Cargo.toml` подменяет crates.io-версию ядра на
+локальную. В CI ядро автоматически выкачивается соседним checkout; из sdist
+патч вырезается, и сборка идёт против опубликованной версии с crates.io.
+
+```bash
+just dev    # собрать расширение и установить в .venv
+just test   # pytest + cargo test
+just check  # форматирование + линтеры
+just bench  # бенчмарк FFI-границы
+```
 
 ## Лицензия
 
