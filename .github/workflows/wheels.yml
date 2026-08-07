@@ -6,15 +6,13 @@ name: wheels
 #
 # Target interpreter set: CPython 3.10–3.14 + free-threaded 3.14t.
 #
-# Two hard constraints shape the layout:
+# One hard constraint shapes the layout:
 #  - setup-python (macOS/Windows) conflates X.Y and X.Yt on one runner — the
 #    free-threaded build clobbers the regular one. So regular and 3.14t live in
-#    SEPARATE jobs, one interpreter family per runner.
-#  - cp314t needs an image that ships it. maturin-action's pinned manylinux_2_28
-#    has no free-threaded build, so glibc x86_64/aarch64 override `container` to
-#    the current PyPA image. Other Linux arches stay regular-only (FT there is
-#    not a real target). `--find-interpreter` over-collects (cp315 pre-release,
-#    experimental cp313t, PyPy), so a filter step drops what we do not publish.
+#    SEPARATE jobs, one interpreter family per runner. On Linux the manylinux
+#    images ship cp314t, so --find-interpreter covers it in the same job.
+#    `--find-interpreter` over-collects (cp315 pre-release, experimental
+#    cp313t, PyPy), so a filter step drops what we do not publish.
 
 on:
   workflow_call:
@@ -29,22 +27,13 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          # x86_64 is native to the runner. `container: auto` picks a PyPA
-          # image with no free-threaded build, and even on the rust-cross image
-          # `--find-interpreter` resolves the regular /usr/bin/python3.x and
-          # never reaches the free-threaded /opt/python interpreters. So pin the
-          # rust-cross image (it ships cp314t) and list interpreters explicitly.
-          # Cross targets discover /opt/python (incl. cp314t) fine via `auto`.
+          # Current PyPA manylinux images ship the free-threaded cp314t build,
+          # so --find-interpreter discovers it everywhere; the old pinned
+          # rust-cross image (whose cross linker recently broke) is gone.
           - target: x86_64
-            container: ghcr.io/rust-cross/manylinux_2_28-cross:x86_64
+            container: auto
             manylinux: "2_28"
-            interpreters: >-
-              -i /opt/python/cp310-cp310/bin/python3.10
-              /opt/python/cp311-cp311/bin/python3.11
-              /opt/python/cp312-cp312/bin/python3.12
-              /opt/python/cp313-cp313/bin/python3.13
-              /opt/python/cp314-cp314/bin/python3.14
-              /opt/python/cp314-cp314t/bin/python3.14t
+            interpreters: --find-interpreter
           - target: aarch64
             container: auto
             manylinux: "2_28"
