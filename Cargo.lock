@@ -332,7 +332,7 @@ dependencies = [
 
 [[package]]
 name = "odin_palace_py"
-version = "0.1.2"
+version = "0.2.0"
 dependencies = [
  "odin_palace",
  "pyo3",

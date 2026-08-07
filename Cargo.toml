@@ -1,6 +1,6 @@
 [package]
 name = "odin_palace_py"
-version = "0.1.2"
+version = "0.2.0"
 edition = "2024"
 authors = ["Tochka"]
 description = "Python bindings for odin_palace 1C bank statement parser"

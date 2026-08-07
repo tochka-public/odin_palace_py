@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.2.0](https://github.com/tochka-public/odin_palace_py/compare/v0.1.2...v0.2.0) (2026-08-07)
+
+
+### Features
+
+* expose the extended 1.03 document fields; split modules; faster FFI boundary ([d30adba](https://github.com/tochka-public/odin_palace_py/commit/d30adbaeeab70f5d3dd17682236bb977c90fdda3))
+
+
+### Bug Fixes
+
+* **build:** drop panic="abort" from the release profile ([8a87a0b](https://github.com/tochka-public/odin_palace_py/commit/8a87a0bdc5a677b89887365e55d14b0c169414b4))
+* **ci:** build wheels from a root checkout against the published core ([323f16f](https://github.com/tochka-public/odin_palace_py/commit/323f16fd2efc254608c30d7181b5c93316751f8f))
+* **ci:** build x86_64 wheels on the standard manylinux image ([8edbecf](https://github.com/tochka-public/odin_palace_py/commit/8edbecf64ab97afdc7fe51af60308a8e316dcccb))
+* require odin_palace 0.2.0 ([844d7dc](https://github.com/tochka-public/odin_palace_py/commit/844d7dc1ba3920ab883dbe9a135c71b71f3cfaf6))
+
 ## [0.1.2](https://github.com/tochka-public/odin_palace_py/compare/v0.1.1...v0.1.2) (2026-05-25)
 
 
