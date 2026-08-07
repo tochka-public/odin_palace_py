@@ -38,12 +38,16 @@ jobs:
       - name: Update odin_palace in Cargo.lock
         id: bump
         run: |
+          # Лок записан с path-источником (локальный патч); после вырезания
+          # патча запись выпадает из графа и `cargo update -p` пакет не видит.
+          # metadata заставляет cargo пере-резолвить odin_palace из crates.io.
+          cargo metadata --format-version 1 > /dev/null
           if [ -n "${{ inputs.version }}" ]; then
             cargo update -p odin_palace --precise "${{ inputs.version }}"
           else
             cargo update -p odin_palace
           fi
-          VERSION=$(cargo metadata --format-version 1 --no-deps=false 2>/dev/null \
+          VERSION=$(cargo metadata --format-version 1 2>/dev/null \
             | jq -r '.packages[] | select(.name == "odin_palace") | .version')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
