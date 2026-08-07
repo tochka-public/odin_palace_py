@@ -47,6 +47,33 @@ class Document:
     payee_ras_account: str | None
     payee_cor_account: str | None
     income_date: str | None
+    counterparty_2: str | None
+    counterparty_3: str | None
+    counterparty_4: str | None
+    counterparty_bank2: str | None
+    payee_1: str | None
+    payee_2: str | None
+    payee_3: str | None
+    payee_4: str | None
+    payee_bank2: str | None
+    payment_kind: str | None
+    payment_deadline: str | None
+    uin: str | None
+    purpose_code: str | None
+    purpose_1: str | None
+    purpose_2: str | None
+    purpose_3: str | None
+    purpose_4: str | None
+    purpose_5: str | None
+    purpose_6: str | None
+    compiler_status: str | None
+    kbk: str | None
+    okato: str | None
+    tax_basis: str | None
+    tax_period: str | None
+    tax_number: str | None
+    tax_date: str | None
+    tax_type: str | None
 
 class Statement:
     """Распарсенная выписка 1CClientBankExchange."""

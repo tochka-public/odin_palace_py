@@ -1,4 +1,4 @@
 {
-  "error_type": "NotStatementError",
-  "message": "Input is not a 1C statement"
+  "error_type": "EmptyInputError",
+  "message": "Input is empty"
 }

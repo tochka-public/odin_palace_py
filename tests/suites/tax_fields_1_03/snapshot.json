@@ -1,0 +1,84 @@
+{
+  "accounts": {
+    "40702810000000000111": {
+      "intervals": [
+        {
+          "date_end": "2024-06-30",
+          "date_start": "2024-06-01",
+          "end_amount": "1300.00",
+          "start_amount": "1000.00",
+          "total_expense": "200.00",
+          "total_income": "500.00"
+        }
+      ],
+      "number": "40702810000000000111"
+    }
+  },
+  "documents": [
+    {
+      "amount": "200.00",
+      "compiler_status": "01",
+      "counterparty": "ООО Ромашка",
+      "counterparty_1": "ООО Ромашка",
+      "counterparty_2": "40702810000000000111",
+      "counterparty_3": "дополнительная строка 3",
+      "counterparty_4": "дополнительная строка 4",
+      "counterparty_account": "40702810000000000111",
+      "counterparty_bank1": "ПАО БАНК",
+      "counterparty_bank2": "Г. МОСКВА",
+      "counterparty_bic": "044525225",
+      "counterparty_cor_account": "30101810400000000225",
+      "counterparty_inn": "7707083893",
+      "counterparty_kpp": "770701001",
+      "counterparty_ras_account": "40702810000000000111",
+      "doc_date": "2024-06-15",
+      "doc_number": "77",
+      "doc_type": "Платежное поручение",
+      "income_date": null,
+      "kbk": "18201061201010000510",
+      "okato": "0",
+      "ordering": "5",
+      "outcome_date": "2024-06-15",
+      "payee": "Казначейство России (ФНС России)",
+      "payee_1": "Казначейство России (ФНС России)",
+      "payee_2": "03100643000000017300",
+      "payee_3": "строка 3 получателя",
+      "payee_4": "строка 4 получателя",
+      "payee_account": "03100643000000017300",
+      "payee_bank1": "ОТДЕЛЕНИЕ ТУЛА БАНКА РОССИИ",
+      "payee_bank2": "Г. ТУЛА",
+      "payee_bic": "017003983",
+      "payee_cor_account": "40102810445370000059",
+      "payee_inn": "7727406020",
+      "payee_kpp": "770801001",
+      "payee_ras_account": "03100643000000017300",
+      "payment_deadline": "20.06.2024",
+      "payment_kind": "Электронно",
+      "payment_type": "01",
+      "purpose": "Единый налоговый платеж",
+      "purpose_1": "Единый налоговый платеж",
+      "purpose_2": null,
+      "purpose_3": null,
+      "purpose_4": null,
+      "purpose_5": null,
+      "purpose_6": null,
+      "purpose_code": "1",
+      "tax_basis": "0",
+      "tax_date": "0",
+      "tax_number": "0",
+      "tax_period": "0",
+      "tax_type": "0",
+      "uin": "18209965144380388511"
+    }
+  ],
+  "encoding": "utf-8",
+  "header": {
+    "ВерсияФормата": "1.03",
+    "ДатаКонца": "30.06.2024",
+    "ДатаНачала": "01.06.2024",
+    "Кодировка": "Windows",
+    "Отправитель": "Банк",
+    "РасчСчет": "40702810000000000111"
+  },
+  "warnings": []
+}
