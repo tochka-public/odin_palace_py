@@ -42,3 +42,6 @@ clean:
     rm -rf dist/
     rm -rf target/wheels/
     uv cache clean
+
+bench:
+    uv run python benchmarks/bench_parse.py
