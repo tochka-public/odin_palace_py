@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/tochka-public/odin_palace_py/compare/v0.2.0...v0.2.1) (2026-08-09)
+
+
+### Bug Fixes
+
+* **ci:** re-resolve the dependency graph before bumping the core in bump-core ([8f69e69](https://github.com/tochka-public/odin_palace_py/commit/8f69e6924074aabf15eefcd60d412e73c93dd2e0))
+* pick up odin_palace 0.2.1 ([#11](https://github.com/tochka-public/odin_palace_py/issues/11)) ([4d727e2](https://github.com/tochka-public/odin_palace_py/commit/4d727e27320125759974ec2ebd481e6c4b2624ab))
+
 ## [0.2.0](https://github.com/tochka-public/odin_palace_py/compare/v0.1.2...v0.2.0) (2026-08-07)
 
 
